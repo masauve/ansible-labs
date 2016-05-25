@@ -1,0 +1,11 @@
+---
+
+- name: Install Apache
+  yum: name=httpd state={{ state }}
+  notify: Restart Apache
+
+- name: Copy index.html
+  become: yes
+  tags: index
+  template: src=index.html dest=/var/www/html/index.html
+  notify: Restart Apache

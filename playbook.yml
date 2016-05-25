@@ -1,0 +1,44 @@
+---
+
+#- hosts: all
+#  remote_user: centos
+#  become: yes
+#  gather_facts: no
+#  vars:
+#    state: present
+#
+#  tasks:
+#    - name: SELinux
+#      selinux: policy=targeted state=permissive
+#    - name: Install Facter
+#      become: yes
+#      yum: name=facter state={{ state }}
+
+- hosts: all
+  remote_user: centos
+  gather_facts: yes
+  vars:
+    state: present
+
+  roles:
+    - common
+
+
+- hosts: web
+  remote_user: centos
+  gather_facts: yes
+  vars:
+    state: present
+
+  roles:
+    - apache
+
+- hosts: lb
+  remote_user: centos
+  gather_facts: yes
+  become: yes
+  vars:
+    state: present
+
+  roles:
+    - haproxy

@@ -1,0 +1,10 @@
+---
+# Variables for the HAproxy configuration
+
+mode: http
+listenport: 8888
+httpd_port: 80
+daemonname: myapplb
+balance: roundrobin
+iface: '{{ ansible_default_ipv4.interface }}'
+
